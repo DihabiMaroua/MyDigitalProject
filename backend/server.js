@@ -14,10 +14,11 @@ sequelize.sync().then(() => {
 
 // Importer les routes
 const userRoutes = require('./src/routes/userRoutes');
+const productRoutes = require('./src/routes/productRoutes');
 
 // Utiliser les routes
 app.use('/api/users', userRoutes);
-
+app.use('/api/products', productRoutes);
 
 // Route racine
 app.get('/', (req, res) => {
