@@ -6,6 +6,7 @@ const PasswordResetCode = require('../models/passwordResetCodes');
 const { Op } = require('sequelize');
 const jwt = require('jsonwebtoken');
 const SALT_ROUNDS = 10; 
+const sequelize = require('../config/sequelize'); 
 
 /*** créer un compte ***/
 exports.createUser = async ({ firstName, lastName, userName, email, password, birthDate }) => {
@@ -238,6 +239,29 @@ exports.updateUser = async (id, { firstName, lastName, email, userName, password
     return { user: await user.reload(), userProfile: await userProfile.reload() };
 };
 
-
+/*** supprimer un compte ***/
+exports.deleteUser = async (id) => {
+    const user = await User.findByPk(id);
+    if (!user) {
+        throw { statusCode: 404, message: 'Utilisateur non trouvé.' };
+    }
+    const transaction = await sequelize.transaction();
+    try {
+        await UserProfile.destroy({
+            where: { idUser: id },
+            transaction
+        });
+        await PasswordResetCode.destroy({
+            where: { idUser: id },
+            transaction
+        });
+        await user.destroy({ transaction });
+        await transaction.commit();
+        return { message: 'Utilisateur supprimé avec succès.' };
+    } catch (error) {
+        await transaction.rollback();
+        throw { statusCode: 500, message: 'Erreur lors de la suppression de l\'utilisateur.' };
+    }
+};
 
 

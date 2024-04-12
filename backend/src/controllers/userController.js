@@ -57,3 +57,14 @@ exports.updateUser = async (req, res) => {
     }
 };
 
+// Supprimer un compte
+exports.deleteUser = async (req, res) => {
+    const userId = req.params.id;
+    try {
+        const response = await userService.deleteUser(userId);
+        res.json({ message: response.message });
+    } catch (error) {
+        console.error("Erreur lors de la suppression de l'utilisateur:", error.message);
+        res.status(error.statusCode || 500).json({ error: error.message || 'Une erreur est survenue lors de la suppression de l\'utilisateur.' });
+    }
+};

@@ -6,7 +6,6 @@ const cors = require('cors');
 app.use(cors());
 require('./src/models/associations');
 
-
 // Synchronisation de la base de données avec Sequelize
 sequelize.sync().then(() => {
   console.log("Database synchronized successfully");
@@ -32,4 +31,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
