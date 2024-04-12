@@ -43,6 +43,19 @@ exports.resetPassword = async (req, res) => {
     }
 };
 
+//infos profil
+exports.getUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await userService.getUserInfo(userId);
+        res.json(user);
+    } catch (error) {
+        console.error("Erreur lors de la récupération de l'utilisateur:", error.message);
+        res.status(error.statusCode || 500).json({ error: error.message || 'Une erreur est survenue lors de la récupération des informations de l\'utilisateur.' });
+        
+    }
+};
+
 // Modifier un profil
 exports.updateUser = async (req, res) => {
     const userId = req.params.id; 

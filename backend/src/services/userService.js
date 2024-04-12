@@ -186,6 +186,19 @@ exports.handlePasswordResetReset = async (email, code, newPassword, step) => {
         }
 };
 
+/*** voir informations d'un profil ***/
+exports.getUserInfo = async (id) => {
+    const user = await User.findByPk(id, {
+        include: [{
+            model: UserProfile,
+            as: 'userProfile'
+        }]
+    });
+    if (!user) {
+        throw { statusCode: 404, message: 'Utilisateur non trouvé.' };
+    }
+    return user;
+};
 
 /*** modifier le profil ***/
 exports.updateUser = async (id, { firstName, lastName, email, userName, password, birthDate }) => {
@@ -238,6 +251,7 @@ exports.updateUser = async (id, { firstName, lastName, email, userName, password
     await userProfile.update({ birthDate });
     return { user: await user.reload(), userProfile: await userProfile.reload() };
 };
+
 
 /*** supprimer un compte ***/
 exports.deleteUser = async (id) => {
