@@ -4,6 +4,8 @@ const sequelize = require('./src/config/sequelize');
 app.use(express.json()); // Middleware pour analyser les requêtes au format JSON
 const cors = require('cors');
 app.use(cors());
+require('./src/models/associations');
+
 
 // Synchronisation de la base de données avec Sequelize
 sequelize.sync().then(() => {

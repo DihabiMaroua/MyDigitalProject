@@ -13,7 +13,7 @@ exports.createUser = async ({ firstName, lastName, userName, email, password, bi
     if (!firstName || !lastName || !userName || !email || !password || !birthDate) {
         throw { statusCode: 400, message: 'Tous les champs sont requis.' };
     }
-
+    
     // Validation de l'âge minimum
     const ageMinimum = 16;
     const today = new Date();
@@ -65,7 +65,7 @@ exports.createUser = async ({ firstName, lastName, userName, email, password, bi
     });
     await UserProfile.create({
         birthDate,
-        idUser: newUser.id 
+        idUser: newUser.id
     });
 
     return newUser;
@@ -184,3 +184,60 @@ exports.handlePasswordResetReset = async (email, code, newPassword, step) => {
             throw { statusCode: 400, message: 'Étape invalide.' };
         }
 };
+
+
+/*** modifier le profil ***/
+exports.updateUser = async (id, { firstName, lastName, email, userName, password, birthDate }) => {
+
+    const user = await User.findByPk(id);
+    if (!user) {
+        throw { statusCode: 404, message: 'Utilisateur non trouvé.' };
+    }
+
+    const updates = {};
+    if (firstName && validators.isValidName(firstName)) {
+        updates.firstName = firstName;
+    }
+    if (lastName && validators.isValidName(lastName)) {
+        updates.lastName = lastName;
+    }
+    if (email && validators.isValidEmail(email) && await validators.checkMXRecords(validators.extractDomain(email))) {
+        const emailExists = await User.findOne({ where: { email, id: { [Op.ne]: id } } });
+        if (emailExists) {
+            throw { statusCode: 400, message: 'Cet email est déjà utilisé par un autre utilisateur.' };
+        }
+        updates.email = email;
+    }
+    if (userName && validators.isValidUserName(userName)) {
+        const userNameExists = await User.findOne({ where: { userName, id: { [Op.ne]: id } } });
+        if (userNameExists) {
+            throw { statusCode: 400, message: 'Ce nom d\'utilisateur est déjà pris.' };
+        }
+        updates.userName = userName;
+    }
+    if (password && validators.isSecurePassword(password)) {
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+        updates.password = hashedPassword;
+    }
+    
+    // Mise à jour de la table User
+    await user.update(updates);
+
+    // Gestion de la mise à jour de la date de naissance
+    const userProfile = await UserProfile.findOne({ where: { idUser: id } });
+    console.log('Updating birthDate:', birthDate);
+
+    if (!userProfile) {
+        throw { statusCode: 404, message: 'Profil utilisateur non trouvé.' };
+    }
+    if (birthDate) {
+        await userProfile.update({ birthDate });
+    }
+    console.log('Received data:', { firstName, lastName, email, userName, password, birthDate });
+    await userProfile.update({ birthDate });
+    return { user: await user.reload(), userProfile: await userProfile.reload() };
+};
+
+
+
+

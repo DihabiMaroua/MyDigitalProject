@@ -42,3 +42,18 @@ exports.resetPassword = async (req, res) => {
       res.status(error.statusCode || 500).json({ error: error.message || 'Une erreur est survenue lors de la réinitialisation du mot de passe.' });
     }
 };
+
+// Modifier un profil
+exports.updateUser = async (req, res) => {
+    const userId = req.params.id; 
+    const { firstName, lastName, email, userName, password, birthDate } = req.body;
+
+    try {
+        const updatedUser = await userService.updateUser(userId, { firstName, lastName, email, userName, password,birthDate });
+        res.json({ message: 'Données utilisateur mises à jour avec succès.', user: updatedUser });
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour de l'utilisateur:", error.message);
+        res.status(error.statusCode || 500).json({ error: error.message || 'Une erreur est survenue lors de la mise à jour des données de l\'utilisateur.' });
+    }
+};
+
