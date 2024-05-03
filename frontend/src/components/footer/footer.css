@@ -1,18 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-:root{
-    --bs-green: #1F6F6A;
-    --bs-beige: #FFD0B8;
-    --bs-white: #fff;
-    --bs-black: #000;
-}
-
 footer.main{
-    width: 1720px;
     background-color: var(--bs-green);
     padding: 8px 0;
 }
 
 .bs-white{
+    color: var(--bs-white);
+}
+
+.title-footer{
+    color: var(--bs-white);
+    font-size: 24px;
+}
+
+.btn-footer {
+    transition: all 300ms ease-in-out;
+    border-radius: 8px;
+    font-family: "Inter", sans-serif;
+    color: var(--bs-white);
+    text-decoration: none;
+}
+
+.btn-footer:hover{
     color: var(--bs-white);
 }

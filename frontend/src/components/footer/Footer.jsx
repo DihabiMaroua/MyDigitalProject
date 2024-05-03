@@ -11,20 +11,20 @@ function Footer () {
               <p class="bs-white">Inscrivez-vous à la newsletter</p>
             </div>
             <div class="col-md-3 offset-md-1">
-              <p className='bs-white'>Dallya</p>
-              <p className='bs-white'><a>Trouver une idée cadeau</a></p>
-              <p className='bs-white'><a>Favoris</a></p>
-              <p className='bs-white'><a>Cagnotte</a></p>
-              <p className='bs-white'><a>Blog</a></p>
-              <p className='bs-white'><a>Mon compte</a></p>
-              <p className='bs-white'><a>A propos</a></p>
+              <p className='title-footer'>Dallya</p>
+              <p><a className='btn-footer' href='/filtre'>Trouver une idée cadeau</a></p>
+              <p><a className='btn-footer' href='/favoris'>Favoris</a></p>
+              <p><a className='btn-footer' href='/cagnotte'>Cagnotte</a></p>
+              <p><a className='btn-footer' href='/blog'>Blog</a></p>
+              <p><a className='btn-footer' href='/authentification'>Mon compte</a></p>
+              <p><a className='btn-footer' href='/about'>A propos</a></p>
             </div>
             <div class="col-md-4 offset-md-1">
-              <p className='bs-white'>Assistance</p>
-              <p className='bs-white'><a>Politique de confidentialités</a></p>
-              <p className='bs-white'><a>Centre d'aide</a></p>
-              <p className='bs-white'><a>Mentions légales</a></p>
-              <p className='bs-white'><a>Supprimer son compte</a></p>
+              <p className='title-footer'>Assistance</p>
+              <p><a className='btn-footer' href='/politique-confidentialites'>Politique de confidentialités</a></p>
+              <p><a className='btn-footer' href='/help'>Centre d'aide</a></p>
+              <p><a className='btn-footer' href='/mentions-legales'>Mentions légales</a></p>
+              <p><a className='btn-footer' href='/delete-account'>Supprimer son compte</a></p>
             </div>
         </div></div>
     </footer>

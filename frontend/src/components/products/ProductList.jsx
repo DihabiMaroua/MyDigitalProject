@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import ProductsListItem from './ProductsListItem'
+import ProductsListItem from './ProductListItem'
 
 /**
  * @param {Array} products
@@ -7,11 +7,20 @@ import ProductsListItem from './ProductsListItem'
  */
 
 function ProductsList ({ products }) {
-  if (!products || products.length < 1) return 'No data'
+  if (!products || products.length < 1)  {
+    return 'No data'
+  }
   return (
-    products.map(product => (
-      <ProductsListItem key={product.id} product={product} />
-    ))
+    <div className="list-container">
+      <h2>Sélection pour la fête des pères</h2>
+      <div className="list">
+        {
+          products.map(product => (
+            <ProductsListItem key={product.id} product={product} />
+          ))
+        }
+      </div>
+    </div>
   )
 }
 

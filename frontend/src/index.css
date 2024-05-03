@@ -11,6 +11,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  --bs-green: #1F6F6A;
+  --bs-beige: #FFD0B8;
+  --bs-white: #fff;
+  --bs-black: #000;
 }
 
 a {
@@ -64,4 +69,67 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.h1{
+  color: var(--bs-green);
+  font-family: Rubik;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 700;
+  position: relative;
+  margin-top: 100px;
+}
+
+.titre-home{
+  color: var(--bs-green);
+  font-family: Rubik;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.card{
+  box-shadow: var(--bs-green) 0px 5px 15px;
+}
+
+.bg-green{
+  background-color: var(--bs-green);
+}
+
+.position-image{
+  position: absolute;
+  top: -35px;
+  left: -65px;
+}
+
+.titre-produit{
+  color: var(--bs-green);
+  font-family: Rubik;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.prix-produit{
+  color: var(--bs-green);
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.titre-blanc{
+  font-family: Rubik;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--bs-white);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.bs-white{
+  color: var(--bs-white);
 }
