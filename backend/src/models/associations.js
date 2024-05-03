@@ -4,6 +4,20 @@ const Category = require('./category');
 const ProductCategory = require('./productCategory');
 const User = require('./user');
 const UserProfile = require('./userProfile');
+const Wishlist = require('./wishlist')
+const WishlistProduct = require('./wishlistProduct')
+
+//Product, Wishlist ( Many to many )
+Product.belongsToMany(Wishlist, { 
+  through: WishlistProduct,
+  foreignKey: 'idProduct',
+  otherKey: 'idWishlist'
+});
+Wishlist.belongsToMany(Product, { 
+  through: WishlistProduct,
+  foreignKey: 'idWishlist',
+  otherKey: 'idProduct'
+});
 
 //Product, Category ( Many to many )
 Product.belongsToMany(Category, { 
@@ -26,3 +40,4 @@ UserProfile.belongsTo(User, {
   foreignKey: 'idUser', 
   as: 'user'
 });
+

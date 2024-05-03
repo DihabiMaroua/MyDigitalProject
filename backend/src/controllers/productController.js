@@ -21,7 +21,7 @@ exports.getProduct = async (req, res) => {
     }
 };
 
-
+//filter les produits
 exports.filterProducts = async (req, res) => {
     try {
       const categoryIds = req.body.categories; 
