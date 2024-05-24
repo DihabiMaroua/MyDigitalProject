@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import ProductsList from '../components/products/ProductList'
+import GiftFilter from '../components/filtre/GiftFilter';
 
 function Home () {
     return (
@@ -14,21 +15,7 @@ function Home () {
             <h1 className="h1">Trouvez un cadeau parfait tout au long de l’année</h1>
           </div>
           <div className="col-md-5 card">
-            <p className="titre-home text-center">À qui est destiné le cadeau ?</p>
-            <div className="row justify-content-center mt-5">
-              <div className="col-md-3 text-center">
-                <img src="../src/assets/anniversaire.svg" class="img-fluid" width="100px" />
-                <p>Garçon</p>
-              </div>
-              <div className="col-md-3 text-center">
-                <img src="../src/assets/anniversaire.svg" class="img-fluid" width="100px" />
-                <p>Fille</p>
-              </div>
-              <div className="col-md-3 text-center">
-                <img src="../src/assets/anniversaire.svg" class="img-fluid" width="100px" />
-                <p>Autre</p>
-              </div>
-            </div>
+            <GiftFilter />
           </div>
         </div>
       </div>
